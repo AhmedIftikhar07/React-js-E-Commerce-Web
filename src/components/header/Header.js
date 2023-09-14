@@ -1,76 +1,15 @@
 import React, { useState } from 'react'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { logo } from '../../assests/index'
-import { ArrowDropDownOutlined, SearchOutlined } from '@mui/icons-material';
+import { ArrowDropDownOutlined, SearchOutlined, ShoppingCart } from '@mui/icons-material';
+import { allItems } from '../../constants';
+import HeaderBottom from './HeaderBottom';
 
 const Header = () => {
     const [showAll, setShowAll] = useState(false);
-    const allItems = [
-        {
-            _id: 100, title: "All Departments",
-        },
-        {
-            _id: 101, title: "Apparel and Fashion",
-        },
-        {
-            _id: 102, title: "Electronics",
-        },
-        {
-            _id: 103, title: "Home and Furniture",
-        },
-        {
-            _id: 104, title: "Beauty and Personal Care",
-        },
-        {
-            _id: 105, title: "Health and Wellness",
-        },
-        {
-            _id: 106, title: "Toys and Games",
-        },
-        {
-            _id: 107, title: "Books, Movies, and Music",
-        },
-        {
-            _id: 108, title: "Sports and Outdoors",
-        },
-       
-        {
-            _id: 109, title: "Jewelry and Watches",
-        },
-       
-        {
-            _id: 110, title: "Automotive",
-        },
-       
-        {
-            _id: 111, title: "Pets",
-        },
-        {
-            _id: 112, title: "Office Supplies",
-        },
-        {
-            _id: 113, title: "Food and Beverages",
-        },
-        {
-            _id: 114, title: "Art and Craft Supplies",
-        },
-        {
-            _id: 115, title: "Baby and Kids",
-        },
-        {
-            _id: 116, title: "Computers",
-        },
-        {
-            _id: 117, title: "Laptops",
-        },
-       
-        {
-            _id: 118, title: "Mobiles",
-        },
-       
-    ]
+    
     return (
-        <div>
+        <div className='w-full sticky top-0 z-50'>
             <div className='w-full bg-amazon_blue text-white px-4 py-3 flex items-center gap-4 ' >
                 {/* image start here  */}
                 <div className='headerHover'>
@@ -105,7 +44,7 @@ const Header = () => {
                                     {
                                         allItems.map((item) => {
                                             return (
-                                                <div key={item.id}>
+                                                <div key={item._id}>
                                                     <li className='py-1 text-sm tracking-wide font-titleFont border-b-[1px] border-b-transparent hover:border-b-amazon_blue cursor-pointer duration-300'>
 
                                                         {item.title}
@@ -131,19 +70,36 @@ const Header = () => {
 
 
                 {/* signin start here  */}
-
+                    <div className='flex flex-col items-start justify-center headerHover'>
+                        <p className='text-xs text-lightText font-light'>hello, sign in</p>
+                        <p className='text-sm font-semibold -mt-1 text-whiteText'>Accounts & Lists <span><ArrowDropDownOutlined/></span></p>
+                    </div>
                 {/* signin end here  */}
 
 
                 {/* orders start here  */}
-
+                    <div className='flex flex-col items-start justify-center headerHover'>
+                        <p className='text-xs text-lightText font-light'>Returns</p>
+                        <p className='text-sm font-semibold -mt-1 text-whiteText'>& Orders</p>
+                    </div>
                 {/* orders end here  */}
 
 
                 {/* cart start here  */}
+                <div className='flex items-start justify-center headerHover relative'>
+                    <ShoppingCart/>
+                    <p className='text-xs font-semibold mt-3 text-whiteText'>Cart <span className='absolute -top-1 left-6 font-semibold p-1 h-4 bg-[#f3a874] text-amazon_blue rounded-full flex items-center justify-center'>0</span></p>
+                </div>
                 {/* cart end here  */}
             </div>
+
+
+            {/* bottom header  */}
+               <HeaderBottom/>
+
         </div>
+
+
     )
 }
 
