@@ -7,13 +7,13 @@ const Product = () => {
   const data = useLoaderData()
   const productData = data.data
   return (
-    <div className='max-w-screen-2xl mx-auto grid grid-cols-4 gap-10'>
+    <div className='max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:gap-10 gap-6'>
       {
         productData.map((item) => (
           <div key={item.id} className='bg-white h-auto border-[1px] border-gray-200 py-10 z-30 hover:border-transparent shadow-none hover:shadow-textShadow duration-200 relative flex flex-col gap-4 '>
             <p className='absolute top-0 right-0 text-xs text-gray-400 p-1 capitalize italic'>{item.category}</p>
             <div className='w-full h-auto flex items-center justify-center relative group'>
-              <img className='w-52 h-64 object-contain' src={item.image} alt="product" />
+              <img className='md:w-52 md:h-64 w-30 h-40 object-contain' src={item.image} alt="product" />
 
               <ul className='absolute w-full h-36 bg-gray-100 bottom-[-165px] group-hover:bottom-0 duration-700 flex flex-col items-end justify-center gap-2 font-titleFont px-2 border-r  border-l '>
                 <li className='productLi'>Compare <span><Api/></span></li>
@@ -38,7 +38,7 @@ const Product = () => {
                   <StarRate />
                 </div>
               </div>
-              <button className='w-full font-titleFont font-medium bg-yellow-300 rounded-md py-1.5  cursor-pointer hover:bg-yellow-400 active:bg-yellow-500 transition-all duration-200 mt-4'>Add to Cart</button>
+              <button className=' w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b boder border-zinc-400 active:border-yellow-800 active:shadow-amazonInput mt-4'>Add to Cart</button>
             </div>
 
           </div>

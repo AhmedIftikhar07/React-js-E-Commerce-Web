@@ -10,7 +10,7 @@ const FooterMiddle = () => {
       {/* ============== Top Start ============== */}
       <div className='w-full border-b-[1px] boder-gray-500 py-10'>
         <div className='max-w-5xl mx-auto text-gray-300'>
-          <div className='w-full grid grid-cols-4 place-items-center items-start'>           
+          <div className='w-full grid md:grid-cols-4 grid-cols-2 place-items-center items-start'>           
             {
               middleList.map((item , index)=>{
                 return(

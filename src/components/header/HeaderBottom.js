@@ -18,11 +18,11 @@ const HeaderBottom = () => {
             {/* =========== List Item Start here ============== */}
             <ul className='flex items-center gap-2 text-sm  tracking-wide'>
                 <li onClick={() => setSidebar(true)} className='headerHover flex items-center gap-1'><Menu /> All</li>
-                <li className='headerHover'>Today's Deals</li>
-                <li className='headerHover'>Customer Service</li>
-                <li className='headerHover'>Gift Cards</li>
-                <li className='headerHover'>Registry</li>
-                <li className='headerHover'>Sell</li>
+                <li className='headerHover hidden mdl:inline-flex'>Today's Deals</li>
+                <li className='headerHover hidden mdl:inline-flex'>Customer Service</li>
+                <li className='headerHover hidden mdl:inline-flex'>Gift Cards</li>
+                <li className='headerHover hidden mdl:inline-flex'>Registry</li>
+                <li className='headerHover hidden mdl:inline-flex'>Sell</li>
             </ul>
             {/* =========== List Item End here ============== */}
             {/* =========== Side Nav Start here ============== */}
@@ -35,7 +35,7 @@ const HeaderBottom = () => {
                             initial={{x:-500 , opacity:0}}
                             animate={{x:0 , opacity:1}}
                             transition={{duration:.3}}
-                             className='w-[350px] h-full bg-white border border-black'>
+                             className='w-[100%] md:w-[350px] h-full bg-white border border-black '>
                                 <div className='w-full bg-amazon_light text-white py-2 px-6 flex items-center gap-4'>
                                     <AccountCircle/>
                                     <h3 className='font-titleFont font-bold text-lg tracking-wide'>Hello, Sign In
@@ -65,7 +65,7 @@ const HeaderBottom = () => {
                                two="Customer Services"
                                three="Contact Us"/>
                                
-                            <span onClick={()=>setSidebar(false)} className='cursor-pointer absolute top-0 left-[360px] w-10 h-10 text-black flex items-center justify-center border bg-gray-200 hover:bg-rose-500 hover:text-white duration-300'>
+                            <span onClick={()=>setSidebar(false)} className='cursor-pointer absolute top-0   left-[89%] md:left-[360px] w-10 h-10 md:text-black flex items-center justify-center md:border md:bg-gray-200 hover:bg-rose-500 hover:text-white duration-300 text-white'>
                                 <Close/>
                             </span>
                             </motion.div>  

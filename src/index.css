@@ -2,13 +2,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body{
+    @apply overflow-x-hidden
+}
 
 @layer components{
     .headerHover{
         @apply px-2 h-[80%] flex  items-center border border-transparent hover:border-white cursor-pointer transition-all duration-200
     }
     .footerLink{
-        @apply text-sm font-titleFont  tracking-wide hover:text-gray-100 cursor-pointer hover:underline duration-200
+        @apply md:text-sm text-xs font-titleFont  tracking-wide hover:text-gray-100 cursor-pointer hover:underline duration-200  text-center md:text-left
     }
     .footerBottonTitle{
         @apply w-24 font-semibold text-[12px] hover:underline text-[#DDD] leading-3 mb-[4px] cursor-pointer 
@@ -19,4 +22,5 @@
     .productLi{
         @apply text-gray-600 hover:text-black text-sm font-medium border-b-[1px] border-b-gray-400 hover:border-b-gray-700 flex items-center justify-end gap-2 hover:cursor-pointer duration-300 w-full
      }
+    
 }

@@ -5,8 +5,10 @@ import bannerImgThree from "./banner/bannerImgThree.jpg";
 import bannerImgFour from "./banner/bannerImgFour.jpg";
 import bannerImgFive from "./banner/bannerImgFive.jpg";
 import pakFlag from "./pakFlag.png";
+import amazonDarkLogo from './amazonDarkLogo.png'
 
 export {
+  amazonDarkLogo,
   logo,
   bannerImgOne,
   bannerImgTwo,

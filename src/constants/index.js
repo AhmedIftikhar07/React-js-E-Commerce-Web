@@ -92,7 +92,7 @@ export const middleList = [
                     "Your Orders",
                     "Shipping Rates & Policies",
                     "Returns & Replacements",
-                    "Manage Your Content and Devices",
+                    "Manage Your Content",
                 ],
             },
         ],

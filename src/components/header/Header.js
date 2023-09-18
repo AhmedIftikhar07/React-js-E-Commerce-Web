@@ -4,6 +4,8 @@ import { logo } from '../../assests/index'
 import { ArrowDropDownOutlined, SearchOutlined, ShoppingCart } from '@mui/icons-material';
 import { allItems } from '../../constants';
 import HeaderBottom from './HeaderBottom';
+import { Link } from 'react-router-dom';
+
 
 const Header = () => {
     const [showAll, setShowAll] = useState(false);
@@ -19,7 +21,7 @@ const Header = () => {
 
 
                 {/* deliver start here  */}
-                <div className='headerHover'>
+                <div className='headerHover hidden mdl:inline-flex'>
                     <LocationOnOutlinedIcon />
                     <p className='text-xs text-lightText font-light flex flex-col'>
                         Deliver to <span className='text-sm font-semibold -mt-1 text-whiteText'>Pakistan</span>
@@ -29,7 +31,7 @@ const Header = () => {
 
 
                 {/* search start here  */}
-                <div className='h-10 flex flex-grow rounded-md relative'>
+                <div className='h-10 hidden lgl:flex flex-grow rounded-md relative'>
                     <span onClick={() => setShowAll(!showAll)} className='w-14 h-full bg-gray-200 hover:bg-gray-300 border-2 cursor-pointer duration-300 text-sm text-amazon_blue font-titleFont flex items-center justify-center rounded-tl-md rounded-bl-md'>
                         All <span></span><ArrowDropDownOutlined />
                     </span>
@@ -70,15 +72,17 @@ const Header = () => {
 
 
                 {/* signin start here  */}
-                    <div className='flex flex-col items-start justify-center headerHover'>
-                        <p className='text-xs text-lightText font-light'>hello, sign in</p>
-                        <p className='text-sm font-semibold -mt-1 text-whiteText'>Accounts & Lists <span><ArrowDropDownOutlined/></span></p>
+                  <Link to={'/signin'}>
+                  <div className='flex flex-col items-start justify-center headerHover'>
+                        <p className='mdl:text-xs text-sm text-white mdl:text-lightText font-light'>hello, sign in</p>
+                        <p className='text-sm font-semibold -mt-1 text-whiteText hidden mdl:inline-flex'>Accounts & Lists <span><ArrowDropDownOutlined/></span></p>
                     </div>
+                  </Link>
                 {/* signin end here  */}
 
 
                 {/* orders start here  */}
-                    <div className='flex flex-col items-start justify-center headerHover'>
+                    <div className='hidden mdl:flex flex-col items-start justify-center headerHover'>
                         <p className='text-xs text-lightText font-light'>Returns</p>
                         <p className='text-sm font-semibold -mt-1 text-whiteText'>& Orders</p>
                     </div>

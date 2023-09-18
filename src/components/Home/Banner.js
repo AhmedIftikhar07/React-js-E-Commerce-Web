@@ -1,102 +1,62 @@
-import React, { useState } from 'react'
+import React   from 'react'
 import Slider from "react-slick";
 import { bannerImgOne, bannerImgTwo, bannerImgThree, bannerImgFour, bannerImgFive } from '../../assests';
-    
+import { KeyboardArrowLeft, KeyboardArrowRightOutlined } from '@mui/icons-material';
+
 const Banner = () => {
-    const [dotActive, setDotActive] = useState()
-    const settings = {
-        dots: true,
-        infinite: true,
-        autoplay: true,
-        arrows: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        beforeChange: (prev,next)=>{
-            setDotActive(next)
-        },
-        appendDots: dots => (
-            <div
-              style={{
-               position: "absolute",
-               top: "70%",
-               left: "45%",
-                transform: "translate(-50% -50%)",
-                width: "210px"
-              }}
-            >
-              <ul style={{ 
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-               }}>
-                {" "}
-                 {dots}
-                 {" "} 
-                 </ul>
-            </div>
-          ),
-          customPaging: i => (
-            <div
-              style={
-                i === dotActive
-                ?
-                {
-                width: "30px",
-                height: "30px",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                background: "#131921",
-                padding: "8px 0",
-                cursor: "pointer",
-                border: "1px #f3a847 solid"
-              } 
-              :
-              {
-                width: "30px",
-                height: "30px",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                background: "#232F3E",
-                padding: "8px 0",
-                cursor: "pointer",
-                border: "1px solid white"
-              }
-            }
-            >
-              {i + 1}
-            </div>
-          )
-      };
+  const LeftArrow = ({ onClick }) => (
+    <button
+      className="custom-arrow left-0 top-1/2 transform -translate-y-1/2 absolute z-10 bg-white text-gray-700 hover:text-gray-900 md:p-2 p-0 rounded-full shadow-md opacity-50 hover:opacity-100 duration-300"
+      onClick={onClick}
+    >
+      <span><KeyboardArrowLeft/></span>
+    </button>
+  );
+
+  // Custom arrow component for the right arrow
+  const RightArrow = ({ onClick }) => (
+    <button
+      className="custom-arrow right-0 top-1/2 transform -translate-y-1/2 absolute z-10 bg-white text-gray-700 hover:text-gray-900 md:p-2 p-0 rounded-full shadow-md opacity-50 hover:opacity-100 duration-300"
+      onClick={onClick}
+    >
+      <span><KeyboardArrowRightOutlined/></span>
+    </button>
+  );
+  const settings = {
+    infinite: true,
+    autoplay: true,
+    arrows: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    prevArrow: <LeftArrow />,
+    nextArrow: <RightArrow />,
+  };
+
+  // Custom arrow component for the left arrow
+
   return (
     <div className='w-full '>
-        <div className='w-ful h-full relative'>
+      <div className='w-ful h-full relative'>
         <Slider {...settings}>
           <div>
-            <img src={bannerImgOne} alt="banner img" />
+            <img  src={bannerImgOne} alt="banner img" />
           </div>
           <div>
-            <img src={bannerImgTwo} alt="banner image2" />
+            <img  src={bannerImgTwo} alt="banner image2" />
           </div>
           <div>
-            <img src={bannerImgThree} alt="banner image3" />
+            <img  src={bannerImgThree} alt="banner image3" />
           </div>
           <div>
-            <img src={bannerImgFour} alt="banner image4" />
+            <img  src={bannerImgFour} alt="banner image4" />
           </div>
           <div>
-            <img src={bannerImgFive} alt="banner image5" />
+            <img  src={bannerImgFive} alt="banner image5" />
           </div>
-      
+
         </Slider>
-        </div>
       </div>
+    </div>
   )
 }
 

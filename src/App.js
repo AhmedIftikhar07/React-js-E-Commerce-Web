@@ -12,6 +12,8 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import { ProductsData } from './api/Api';
+import Signin from './pages/Signin';
+import Registration from './pages/Registration';
 
 const Layout = ()=>{
   return(
@@ -25,10 +27,16 @@ const Layout = ()=>{
 
 function App() {
   const router = createBrowserRouter(createRoutesFromElements(
+<>
 
       <Route path='/' element={<Layout/>}>
         <Route index  element={<Home/>} loader={ProductsData}></Route>
       </Route>
+      <Route >
+        <Route path='/signin'  element={<Signin/>}></Route>
+        <Route path='/registration'  element={<Registration/>}></Route>
+      </Route>
+</>
     
   ))
 
