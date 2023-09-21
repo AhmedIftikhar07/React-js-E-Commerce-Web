@@ -9,16 +9,19 @@ import {
   Outlet,
   Route,
   createRoutesFromElements,
+  ScrollRestoration,
 } from "react-router-dom";
 import Home from './pages/Home';
 import { ProductsData } from './api/Api';
 import Signin from './pages/Signin';
 import Registration from './pages/Registration';
+import Cart from './pages/Cart';
 
 const Layout = ()=>{
   return(
     <>
     <Header/>
+    <ScrollRestoration/>
     <Outlet/>
     <Footer/>
     </>
@@ -31,6 +34,7 @@ function App() {
 
       <Route path='/' element={<Layout/>}>
         <Route index  element={<Home/>} loader={ProductsData}></Route>
+        <Route path='/cart'  element={<Cart/>}></Route>
       </Route>
       <Route >
         <Route path='/signin'  element={<Signin/>}></Route>

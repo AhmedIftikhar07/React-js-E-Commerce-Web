@@ -1,9 +1,12 @@
 
 import { Api, ShoppingCart, ArrowCircleRight , Favorite , StarRate } from '@mui/icons-material'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useLoaderData } from 'react-router-dom'
+import { addToCart } from '../../redux/AmazonSlice'
 
 const Product = () => {
+  const dispatch = useDispatch()
   const data = useLoaderData()
   const productData = data.data
   return (
@@ -38,7 +41,15 @@ const Product = () => {
                   <StarRate />
                 </div>
               </div>
-              <button className=' w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b boder border-zinc-400 active:border-yellow-800 active:shadow-amazonInput mt-4'>Add to Cart</button>
+              <button onClick={()=>dispatch(addToCart({
+                id:item.id,
+                category:item.category,
+                title:item.title,
+                description:item.description,
+                price:item.price,
+                image:item.image,
+                quantity:1,
+              }))} className=' w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b boder border-zinc-400 active:border-yellow-800 active:shadow-amazonInput mt-4'>Add to Cart</button>
             </div>
 
           </div>

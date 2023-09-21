@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "slick-carousel/slick/slick.css";
-
+import {Store} from './redux/Store'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  
-    <App />
+    <Provider store={Store}>
+        <App />
+    </Provider>
  
 );
 
