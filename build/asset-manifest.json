@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5a6dc3a5.css",
+    "main.js": "/static/js/main.e90542b4.js",
+    "static/js/787.1caf872c.chunk.js": "/static/js/787.1caf872c.chunk.js",
+    "static/media/bannerImgTwo.jpg": "/static/media/bannerImgTwo.bc1bdb910ead16c65197.jpg",
+    "static/media/bannerImgFour.jpg": "/static/media/bannerImgFour.8f7fc6b56e74dba2b6f9.jpg",
+    "static/media/bannerImgOne.jpg": "/static/media/bannerImgOne.efb3d39101f7ef77d616.jpg",
+    "static/media/bannerImgThree.jpg": "/static/media/bannerImgThree.c80809bb40bee5c34372.jpg",
+    "static/media/bannerImgFive.jpg": "/static/media/bannerImgFive.aa945e25375bfdee385f.jpg",
+    "static/media/amazonDarkLogo.png": "/static/media/amazonDarkLogo.fe636390e284c941156a.png",
+    "static/media/logo.png": "/static/media/logo.1c9be0b254d3ff1dc9e9.png",
+    "static/media/pakFlag.png": "/static/media/pakFlag.a67ea34876d9ec721387.png",
+    "static/media/emptyCart.png": "/static/media/emptyCart.230e4848b62fb3cab325.png",
+    "index.html": "/index.html",
+    "main.5a6dc3a5.css.map": "/static/css/main.5a6dc3a5.css.map",
+    "main.e90542b4.js.map": "/static/js/main.e90542b4.js.map",
+    "787.1caf872c.chunk.js.map": "/static/js/787.1caf872c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5a6dc3a5.css",
+    "static/js/main.e90542b4.js"
+  ]
+}
