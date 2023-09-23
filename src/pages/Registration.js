@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import { logo } from '../assests'
 import { ArrowRight } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+import { FadeLoader } from 'react-spinners'
+import { motion } from 'framer-motion'
+
 
 const Registration = () => {
-
+  const auth = getAuth()
   const [clientName, setClientName] = useState('')
   const [email, setEmail] = useState('') 
   const [password, setPassword] = useState('')
   const [cPassword, setCPassword] = useState('')
+  const [loading, setloading] = useState(false)
+  const [succMess, setSuccMess] = useState('')
+  const navigate = useNavigate()
 
 
   // error messages
@@ -16,6 +23,8 @@ const Registration = () => {
   const [Erremail, setErrEmail] = useState('') 
   const [Errpassword, setErrPassword] = useState('')
   const [ErrcPassword, setErrCPassword] = useState('')
+  const [firebaseErr, setFirebaseErr] = useState('')
+ 
 
 
 
@@ -55,6 +64,7 @@ const Registration = () => {
     }
     if(!email){
       setErrEmail("Enter your Email")
+      setFirebaseErr('')
     }else{
       if(!emailValidation(email)){
         setErrEmail("Invalid Email")
@@ -74,15 +84,40 @@ const Registration = () => {
         setErrCPassword('Password not matched')
       }
     }
-
     if(clientName && email && emailValidation(email) && password && password.length >=6 && cPassword && cPassword === password){
       console.log(clientName,email,password,cPassword);
+      setloading(true)
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential)=>{
+        updateProfile(auth.currentUser, {
+          displayName: clientName,
+          photoURL:"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80"
+        })
+        const user = userCredential.user
+        console.log(user);
+        console.log(user.uid);
+        setloading(false)
+        setSuccMess("Successfully Registered")
+        setTimeout(()=>{
+          navigate('/signin')
+        },3000)
+      })
+      .catch((error)=>{
+        const errorCode = error.code
+        if (error.code === "auth/email-already-in-use") {
+          setFirebaseErr("Email already in use, try another");
+          setloading(false)
+        }
+        console.log(errorCode);
+        setloading(false)
+      })
       setClientName('')
       setEmail('')
       setPassword('')
       setCPassword('')
-    }
    
+    }
+
   }
   return (
     <div className='w-full '>
@@ -121,6 +156,12 @@ const Registration = () => {
                     >!</span> {Erremail}</p>
                   )
                 }
+                  {
+                  firebaseErr && (
+                    <p className='text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5'><span className='text-red-600 font-extrabold italic font-titleFont text-base'
+                    >!</span> {firebaseErr}</p>
+                  )
+                }
               </div>
               <div className='flex flex-col gap-2'>
                 <p className='text-sm font-medium'>Password</p>
@@ -155,6 +196,26 @@ const Registration = () => {
               </div>
               <button onClick={handleRegistration} className='w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 active:shadow-amazonInput'>Continue</button>
             </div>
+           
+              {
+                loading && (
+                  <div className='flex items-center justify-center text-center py-2'>
+                    <FadeLoader color='#f0c14b'/>
+                  </div>
+                )
+              }
+              {
+                succMess && (
+                  <motion.div 
+                  initial={{y: 10 , opacity: 0}}
+                  animate={{y: 0 , opacity: 1}}
+                  transition={{delay: 0.5 , duration: 0.5}}
+                   className='mt-2 flex items-center justify-center text-center py-2 text-green-600 border-[1px] border-green-600 px-2'>
+                    <p>{succMess}</p>
+                  </motion.div>
+                )
+              }
+           
             <p className='text-xs text-black leading-4 mt-4'>By Continuing, you agree to Amazon's <span className='text-blue-600 cursor-pointer'>Conditions of Use</span> and <span className='text-blue-600 cursor-pointer'>Privacy Notice</span></p>
             <p className='text-xs text-gray-600 mt-4 cursor-pointer group'>Already have an account? <Link to={'/signin'}><span className='text-blue-600 group-hover:text-orange-600 group-hover:underline duration-100'>Sign In </span> <ArrowRight /> </Link></p>
             <p className='text-xs text-gray-600 -mt-1 cursor-pointer group'>Buying for work?  <span className='text-blue-600 text-xs  group-hover:text-orange-600 group-hover:underline duration-100'>Create a free business account </span><ArrowRight /></p>

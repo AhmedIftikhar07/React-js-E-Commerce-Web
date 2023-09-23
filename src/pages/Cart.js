@@ -2,10 +2,14 @@ import { CheckCircle } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { decreamentQty, deleteItem, increamentQty, resetCart } from '../redux/AmazonSlice'
+import { emptyCart } from '../assests'
+import { motion } from "framer-motion"
+import { Link } from 'react-router-dom'
+
 
 function Cart() {
     const dispatch = useDispatch()
-    const products = useSelector((state)=>state.amazoneReducer.products)
+   const products = useSelector((state)=>state.amazon.products)
     const [totalPrice, setTotalPrice] = useState('')
     useEffect(()=>{
         let Total = 0;
@@ -16,7 +20,10 @@ function Cart() {
     },[products])
     return (
         <div className='w-full bg-gray-100 p-4 '>
-            <div className='container mx-auto h-auto grid grid-cols-5 gap-8 '>
+          
+            {
+                products.length > 0 ? 
+                <div className='container mx-auto h-auto grid grid-cols-5 gap-8 '>
                 <div className='w-full h-full bg-white px-4 col-span-4'>
                     <div className='font-titleFont flex items-center justify-between border-b-[1px] border-b-gray-400 py-3'>
                         <h2 className='text-3xl font-medium'>Shopping Cart</h2>
@@ -67,6 +74,27 @@ function Cart() {
                     <button  className='w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 active:shadow-amazonInput'>Proceed to Pay</button>
                 </div>
             </div>
+            :
+            <motion.div
+            initial={{y: 70 , opacity: 0}}
+            animate={{y: 0 , opacity: 1}}
+            transition={{delay: 0.5 , duration: 0.5}}
+             className='flex justify-center items-center gap-4 py-10'>
+                <div>
+                    <img
+                    className='w-80 rounded-lg p-4 mx-auto' 
+                    src={emptyCart} alt="emptyCartimg" />
+                </div>
+                <div className='w-96 p-4 bg-white flex flex-col gap-4 items-center rounded-md shadow-lg'>
+                    <h1 className='font-titleFont text-xl font-bold'>Your cart feels lonely.</h1>
+                    <p className='text-sm text-center'>Your cart is empty. Start shopping now to fill it with amazing products!</p>
+                   <Link to={'/'}>
+                   <button  className='px-4  py-1.5 text-sm font-semibold rounded-sm bg-gradient-to-t from-[#ffdd8f] to-[#f0c14b] hover:bg-gradient-to-b active:shadow-amazonInput ' >Continue Shopping</button>
+                   </Link>
+                </div>
+            </motion.div>
+                        
+            }
         </div>
     )
 }

@@ -4,14 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "slick-carousel/slick/slick.css";
-import {Store} from './redux/Store'
+import {Store ,persistor} from './redux/Store'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import firebaseConfig from './firebase.config';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  
     <Provider store={Store}>
+        <PersistGate loading={"loading"} persistor={persistor}>
         <App />
+        </PersistGate>
     </Provider>
  
 );

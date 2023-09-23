@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
 import { logo } from '../assests'
-import { ArrowRight, PanoramaFishEye, Password, RemoveRedEye, RemoveRedEyeSharp, RemoveRedEyeTwoTone } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import { ArrowRight} from '@mui/icons-material'
+import { Link, useNavigate } from 'react-router-dom'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { motion } from 'framer-motion'
+import { FadeLoader } from 'react-spinners'
+import { useDispatch } from 'react-redux'
+import { setUserInfo } from '../redux/AmazonSlice'
 
 const Signin = () => {
+  const auth = getAuth()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   // const [showPassword, setShowPassword] = useState(false);
 
   // states
@@ -11,16 +19,21 @@ const Signin = () => {
   const [password, setPassword] = useState('')
   const [Erremail, setErrEmail] = useState('') 
   const [Errpassword, setErrPassword] = useState('')
+  const [loading, setloading] = useState(false)
+  const [succMess, setSuccMess] = useState('')
+  const [firebaseErr, setFirebaseErr] = useState('')
 
 
   // handler functions
   const HandleEmail = (e)=>{
     setEmail(e.target.value)
     setErrEmail('')
+    setFirebaseErr('')
   }
   const HandlePassword = (e)=>{
     setPassword(e.target.value)
     setErrPassword('')
+    setFirebaseErr('')
   }
 
 
@@ -34,7 +47,34 @@ const Signin = () => {
       setErrPassword("Enter your Password")
     }
     if(email && password){
-      console.log(email, password);
+      setloading(true)
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential)=>{
+        const user = userCredential.user
+        dispatch(setUserInfo({
+          _id:user.uid,
+          userName:user.displayName,
+          email:user.email,
+          image:user.photoURL,
+        }))
+        console.log(user);
+        setloading(false)
+        setSuccMess("Successfully Logged in")
+        setTimeout(() => {
+          navigate('/')
+        }, 2000);
+      })
+      .catch((error)=>{
+        if(error.code === "auth/invalid-login-credentials"){
+          setFirebaseErr("Invalid email or passsword")
+          setloading(false)
+        }else{
+          setFirebaseErr("Invalid email or passsword")
+          setloading(false)
+        }
+       
+        
+      })
       setEmail('')
       setPassword('')
     }
@@ -86,8 +126,36 @@ const Signin = () => {
                   {/* {showPassword ? <RemoveRedEye /> : <RemoveRedEyeTwoTone/>} */}
                 </span>
               </div>
+
+              {
+                  firebaseErr && (
+                    <p className='text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5'><span className='text-red-600 font-extrabold italic font-titleFont text-base'
+                    >!</span> {firebaseErr}</p>
+                  )
+                }
+
               <button onClick={HandleLogin} className='w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 active:shadow-amazonInput'>Continue</button>
             </div>
+                
+            {
+                loading && (
+                  <div className='flex items-center justify-center text-center py-2'>
+                    <FadeLoader color='#f0c14b'/>
+                  </div>
+                )
+              }
+              {
+                succMess && (
+                  <motion.div 
+                  initial={{y: 10 , opacity: 0}}
+                  animate={{y: 0 , opacity: 1}}
+                  transition={{delay: 0.5 , duration: 0.5}}
+                   className='mt-2 flex items-center justify-center text-center py-2 text-green-600 border-[1px] border-green-600 px-2'>
+                    <p>{succMess}</p>
+                  </motion.div>
+                )
+              }
+           
             <p className='text-xs text-black leading-4 mt-4'>By Continuing, you agree to Amazon's <span className='text-blue-600 cursor-pointer'>Conditions of Use</span> and <span className='text-blue-600 cursor-pointer'>Privacy Notice</span></p>
             <p className='text-xs text-gray-600 mt-4 cursor-pointer group'><ArrowRight /> <span className='text-blue-600 group-hover:text-orange-600 group-hover:underline duration-100'>Need help?</span></p>
 

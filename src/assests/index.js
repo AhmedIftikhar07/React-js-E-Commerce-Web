@@ -6,6 +6,7 @@ import bannerImgFour from "./banner/bannerImgFour.jpg";
 import bannerImgFive from "./banner/bannerImgFive.jpg";
 import pakFlag from "./pakFlag.png";
 import amazonDarkLogo from './amazonDarkLogo.png'
+import emptyCart from './emptyCart.png'
 
 export {
   amazonDarkLogo,
@@ -16,4 +17,5 @@ export {
   bannerImgFour,
   bannerImgFive,
   pakFlag,
+  emptyCart
 };
